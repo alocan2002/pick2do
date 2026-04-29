@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "start:bg": "pm2 start ecosystem.config.js",
+    "stop:bg": "pm2 stop pick2do",
     "lint": "eslint"
   },
   "dependencies": {

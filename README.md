@@ -1,36 +1,126 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pick2do
 
-## Getting Started
+> **Developer Note:** I am a university student, and I originally built this app to solve my own personal time-management and focus needs. It's designed to cut through the noise of traditional to-do lists and help you figure out what to do *right now*.
 
-First, run the development server:
+Pick2do is a blazing-fast, keyboard-first, smart task management application built for minimal friction and maximum focus. Instead of overwhelming you with endless checklists, Pick2do dynamically scores and sorts your tasks based on **how much time you have right now** and your current **cognitive focus** (Deep vs. Shallow work).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Technical Overview (For Recruiters & Developers)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This project was built from scratch with a focus on performance, accessibility, and modern web architecture:
+- **Framework:** Next.js (App Router) with React 19
+- **Language:** TypeScript for robust, end-to-end type safety
+- **Styling:** Vanilla inline CSS / minimal styling for maximum speed and zero dependencies
+- **Architecture:** Modular component design emphasizing reusability and clean separation of concerns
+- **Backend/API:** Next.js Route Handlers (`app/api/...`) that read and write to the local filesystem using Node.js `fs/promises`
+- **Algorithms:** Custom dynamic scoring and sorting algorithm that prioritizes tasks based on real-time constraints (duration, deadlines, and cognitive load)
+- **Accessibility:** 100% keyboard-navigable interface with customized event listeners and segmented controls for power users
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Philosophy
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Most task managers fail because they ask you "What do you want to do?" when they should be asking **"What *can* you do right now?"**. 
 
-## Learn More
+If you only have 15 minutes between meetings, your task manager shouldn't show you a 90-minute architecture refactor. If you're exhausted and just want to clear some emails, it shouldn't show you deep-focus coding tasks.
 
-To learn more about Next.js, take a look at the following resources:
+Pick2do solves this by:
+1. **Dynamic Scoring**: Tasks are prioritized based on approaching deadlines, duration fit, and cognitive load match.
+2. **Frictionless Splitting**: If a task is too big (e.g., exceeds 90 minutes), the app *forces* you to split it into manageable, sequential chunks.
+3. **Keyboard First**: Every single interaction is built to be navigated flawlessly with a keyboard. No mouse required.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Key Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Smart Prioritization**: Enter your available time and focus state, and the algorithm surfaces the perfect tasks.
+- **Mandatory Splitting**: Enforces task size limits to prevent procrastination on oversized items.
+- **Sequential Dependencies**: When splitting tasks, you can mark them as sequential so subsequent parts remain hidden until the first part is completed.
+- **Local JSON Storage**: Everything is saved instantly to a local `data.json` file. No database, no backend, no accounts required. Complete privacy and easily backed up to Dropbox or Google Drive.
+- **Accessible & Fast**: 100% keyboard navigable with instant UI updates and zero bloat.
 
-## Deploy on Vercel
+## Installation & Booting
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Pick2do is built with Next.js and requires Node.js to be installed on your machine.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/pick2do.git
+   cd pick2do
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Boot the application normally (for development):**
+   ```bash
+   npm run dev
+   ```
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## Running in the Background (Always On)
+
+If you want Pick2do to run completely silently in the background (so you never have to keep a terminal open, and it automatically starts when you restart your computer), you can use PM2:
+
+1. **Install PM2 Globally:**
+   ```bash
+   npm install -g pm2
+   ```
+
+2. **Build and Start the Background Service:**
+   ```bash
+   npm run build
+   npm run start:bg
+   ```
+
+3. **Make it Survive Computer Reboots:**
+   Run the following command and follow the instructions it prints on your screen:
+   ```bash
+   pm2 startup
+   ```
+   Once you've run the generated command, save your current running processes:
+   ```bash
+   pm2 save
+   ```
+   *Your app is now permanently running at `http://localhost:3000` even after you restart your computer!*
+
+## How the Save System Works
+
+Pick2do is completely serverless but uses a tiny, lightning-fast Next.js Route Handler to read and write your data directly to your local filesystem. 
+
+* Every time you add, edit, split, or complete a task, the changes are saved instantly to a local `data.json` file in the root of your project directory.
+* Because the data is stored in a simple `.json` file, it is incredibly easy to backup, sync with Dropbox/Google Drive, or migrate to a new machine.
+* The frontend synchronizes with this file instantly to ensure zero UI lag while making sure your data is perfectly persisted.
+
+## Keyboard Shortcuts Cheat Sheet
+
+* **Global**
+  * `[N]` - Add a new task
+  * `[S]` - Open settings/preferences
+  * `[R]` - Restart session (re-select time and focus)
+  * `[A]` - Toggle "Show all" vs "Show top 2" tasks
+  * `[C]` - Toggle "Show done" tasks
+
+* **Navigation & Forms**
+  * `[Tab]` - Navigate between inputs and buttons
+  * `[Space]` / `[Enter]` - Toggle tasks as complete, submit forms, or toggle focus states
+  * `[Esc]` - Close any open modal (Add, Edit, Split, Settings)
+
+## Configuration (Settings)
+
+You can hit `[S]` to open the Algorithm Settings. Here you can tweak exactly how Pick2do scores your tasks:
+* **Max Task Duration**: The limit before a task *must* be split.
+* **Focus Match/Mismatch**: How heavily to reward/penalize tasks that match your current cognitive state.
+* **Overtime Penalty**: Penalty for tasks that take longer than your available session time.
+* **Deadline Urgency**: How many points to award based on approaching due dates.
+
+## Future Ideas
+
+Coming up soon:
+- dark mode
+- stats
+- repeating tasks
+- mobile app
+- maybe focus mode with timer
+- reward mechanism, collecting points
+- cross device sync drive/dropbox or something
+
+---
+*Built for flow.*
