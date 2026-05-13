@@ -1,6 +1,8 @@
 # pick2do
 
-> **Developer Note:** I am a student, and I built this app to solve my own personal time-management and focus needs. It's designed to cut through the noise of traditional to-do lists and help you figure out what to do *right now*.
+
+> **Developer Note:** I am a university student, and I built this app with heavy use of AI to solve my own personal time-management and focus needs. It's designed to cut through the noise of traditional to-do lists and help you figure out what to do *right now*.
+
 
 pick2do is a blazing-fast, keyboard-first, smart task management application built for minimal friction and maximum focus. Instead of overwhelming you with endless checklists, pick2do dynamically scores and sorts your tasks based on **how much time you have right now** and your current **cognitive focus** (Deep vs. Shallow work).
 
