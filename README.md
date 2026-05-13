@@ -1,10 +1,10 @@
-# Pick2do
+# pick2do
 
-> **Developer Note:** I am a university student, and I originally built this app to solve my own personal time-management and focus needs. It's designed to cut through the noise of traditional to-do lists and help you figure out what to do *right now*.
+> **Developer Note:** I am a student, and I built this app to solve my own personal time-management and focus needs. It's designed to cut through the noise of traditional to-do lists and help you figure out what to do *right now*.
 
-Pick2do is a blazing-fast, keyboard-first, smart task management application built for minimal friction and maximum focus. Instead of overwhelming you with endless checklists, Pick2do dynamically scores and sorts your tasks based on **how much time you have right now** and your current **cognitive focus** (Deep vs. Shallow work).
+pick2do is a blazing-fast, keyboard-first, smart task management application built for minimal friction and maximum focus. Instead of overwhelming you with endless checklists, pick2do dynamically scores and sorts your tasks based on **how much time you have right now** and your current **cognitive focus** (Deep vs. Shallow work).
 
-## Technical Overview (For Recruiters & Developers)
+## Technical Overview
 
 This project was built from scratch with a focus on performance, accessibility, and modern web architecture:
 - **Framework:** Next.js (App Router) with React 19
@@ -21,7 +21,7 @@ Most task managers fail because they ask you "What do you want to do?" when they
 
 If you only have 15 minutes between meetings, your task manager shouldn't show you a 90-minute architecture refactor. If you're exhausted and just want to clear some emails, it shouldn't show you deep-focus coding tasks.
 
-Pick2do solves this by:
+pick2do solves this by:
 1. **Dynamic Scoring**: Tasks are prioritized based on approaching deadlines, duration fit, and cognitive load match.
 2. **Frictionless Splitting**: If a task is too big (e.g., exceeds 90 minutes), the app *forces* you to split it into manageable, sequential chunks.
 3. **Keyboard First**: Every single interaction is built to be navigated flawlessly with a keyboard. No mouse required.
@@ -36,7 +36,7 @@ Pick2do solves this by:
 
 ## Installation & Booting
 
-Pick2do is built with Next.js and requires Node.js to be installed on your machine.
+pick2do is built with Next.js and requires Node.js to be installed on your machine.
 
 1. **Clone the repository:**
    ```bash
@@ -57,7 +57,7 @@ Pick2do is built with Next.js and requires Node.js to be installed on your machi
 
 ## Running in the Background (Always On)
 
-If you want Pick2do to run completely silently in the background (so you never have to keep a terminal open, and it automatically starts when you restart your computer), you can use PM2:
+If you want pick2do to run completely silently in the background (so you never have to keep a terminal open, and it automatically starts when you restart your computer), you can use PM2:
 
 1. **Install PM2 Globally:**
    ```bash
@@ -83,7 +83,7 @@ If you want Pick2do to run completely silently in the background (so you never h
 
 ## How the Save System Works
 
-Pick2do is completely serverless but uses a tiny, lightning-fast Next.js Route Handler to read and write your data directly to your local filesystem. 
+pick2do is completely serverless but uses a tiny, lightning-fast Next.js Route Handler to read and write your data directly to your local filesystem. 
 
 * Every time you add, edit, split, or complete a task, the changes are saved instantly to a local `data.json` file in the root of your project directory.
 * Because the data is stored in a simple `.json` file, it is incredibly easy to backup, sync with Dropbox/Google Drive, or migrate to a new machine.
@@ -105,7 +105,7 @@ Pick2do is completely serverless but uses a tiny, lightning-fast Next.js Route H
 
 ## Configuration (Settings)
 
-You can hit `[S]` to open the Algorithm Settings. Here you can tweak exactly how Pick2do scores your tasks:
+You can hit `[S]` to open the Algorithm Settings. Here you can tweak exactly how pick2do scores your tasks:
 * **Max Task Duration**: The limit before a task *must* be split.
 * **Focus Match/Mismatch**: How heavily to reward/penalize tasks that match your current cognitive state.
 * **Overtime Penalty**: Penalty for tasks that take longer than your available session time.
@@ -121,6 +121,7 @@ Coming up soon:
 - maybe focus mode with timer
 - reward mechanism, collecting points
 - cross device sync drive/dropbox or something
+- screenshots and the logic behind due date without year input in readme
 
 ---
 *Built for flow.*

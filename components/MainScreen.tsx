@@ -54,7 +54,7 @@ export function MainScreen({ availableMinutes, cogState, onAddTask, onEditTask, 
           </div>}
         </td>
         <td style={td({ fontSize: 12, color: t.mu, textAlign: "center" })}>{task.deadline || "—"}</td>
-        <td style={td({ fontSize: 12, color: t.mu, textAlign: "center" })}>{task.duration}m</td>
+        <td style={td({ fontSize: 12, color: t.mu, textAlign: "center" })}>{task.duration ? `${task.duration}m` : "—"}</td>
         <td style={td({ fontSize: 11, color: t.mu, textAlign: "center", textTransform: "capitalize" })}>{task.cognitive}</td>
         <td style={td({ fontSize: 11, textAlign: "center", color: task.done ? t.mu : over ? "#bbb" : sc > 0 ? "#060" : sc < 0 ? "#c00" : t.mu })}>
           {!task.done && !over ? (sc > 0 ? `+${sc}` : `${sc}`) : ""}

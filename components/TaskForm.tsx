@@ -30,9 +30,10 @@ export function TaskForm({ initial, onBack, onSubmit, onSplit, submitLabel, pref
       dl = `${day.padStart(2, "0")}-${month.padStart(2, "0")}`;
       if (!ddmmToDate(dl)) { setErr("Invalid date"); return; }
     }
-    if (!duration || Number(duration) < 1) { setErr("Duration required"); return; }
+    const durNum = duration ? Number(duration) : 0;
+    if (duration !== "" && durNum < 0) { setErr("Duration cannot be negative"); return; }
     if (!cognitive) { setErr("Focus required"); return; }
-    onSubmit({ subject, name, deadline: dl, duration: Number(duration), cognitive, parentId: initial.parentId });
+    onSubmit({ subject, name, deadline: dl, duration: durNum, cognitive, parentId: initial.parentId });
   };
 
   const handleSplit = () => {
@@ -44,9 +45,10 @@ export function TaskForm({ initial, onBack, onSubmit, onSplit, submitLabel, pref
       dl = `${day.padStart(2, "0")}-${month.padStart(2, "0")}`;
       if (!ddmmToDate(dl)) { setErr("Invalid date"); return; }
     }
-    if (!duration || Number(duration) < 1) { setErr("Duration required"); return; }
+    const durNum = duration ? Number(duration) : 0;
+    if (duration !== "" && durNum < 0) { setErr("Duration cannot be negative"); return; }
     if (!cognitive) { setErr("Focus required"); return; }
-    onSplit({ subject, name, deadline: dl, duration: Number(duration), cognitive, parentId: initial.parentId });
+    onSplit({ subject, name, deadline: dl, duration: durNum, cognitive, parentId: initial.parentId });
   };
 
   useEffect(() => {
@@ -83,8 +85,8 @@ export function TaskForm({ initial, onBack, onSubmit, onSplit, submitLabel, pref
           </div>
           <div style={{ display: "flex", gap: 12 }}>
             <div style={{ width: 80, display: "flex", flexDirection: "column", gap: 4 }}>
-              <label style={{ fontSize: 11, fontWeight: 500, color: t.mu, textTransform: "uppercase", letterSpacing: "0.05em" }}>Min</label>
-              <input type="number" min={1} placeholder="30" value={duration} onChange={e => setDuration(e.target.value)} style={inp} />
+              <label style={{ fontSize: 11, fontWeight: 500, color: t.mu, textTransform: "uppercase", letterSpacing: "0.05em" }}>Min (Opt)</label>
+              <input type="number" min={0} placeholder="0 for infinite" value={duration} onChange={e => setDuration(e.target.value)} style={inp} />
             </div>
             <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 4 }}>
               <label style={{ fontSize: 11, fontWeight: 500, color: t.mu, textTransform: "uppercase", letterSpacing: "0.05em" }}>Focus</label>

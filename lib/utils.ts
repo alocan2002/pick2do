@@ -29,8 +29,8 @@ export function scoreTask(task: Task, sessionMin: number, focus: Cog, p: Prefere
     sc += p.fallback;
   }
   if (focus) sc += task.cognitive === focus ? p.focusMatch : p.focusMismatch;
-  if (task.duration > sessionMin) sc += p.timeDoesntFit;
-  if (task.duration <= p.smallTaskThreshold) sc += p.smallTaskBonus;
+  if (task.duration > 0 && task.duration > sessionMin) sc += p.timeDoesntFit;
+  if (task.duration > 0 && task.duration <= p.smallTaskThreshold) sc += p.smallTaskBonus;
   return sc;
 }
 

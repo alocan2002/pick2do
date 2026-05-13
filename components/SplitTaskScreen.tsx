@@ -27,7 +27,7 @@ export function SplitTaskScreen({ source, onBack, onSubmitAll, prefs }: { source
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     const sum = parts.reduce((acc, p) => acc + p.duration, 0);
-    if (sum !== source.duration) {
+    if (source.duration > 0 && sum !== source.duration) {
       setErr(`Total must be exactly ${source.duration}m (currently ${sum}m)`);
       return;
     }
@@ -52,7 +52,7 @@ export function SplitTaskScreen({ source, onBack, onSubmitAll, prefs }: { source
           <button onClick={onBack} title="Close [Esc]" style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: t.mu, lineHeight: 1, padding: 0 }}>×</button>
         </header>
         <form onSubmit={submit} noValidate style={{ display: "flex", flexDirection: "column", gap: 12, padding: 16, overflowY: "auto" }}>
-          <div style={{ fontSize: 11, color: t.mu, marginBottom: 4 }}>Task <strong style={{ color: t.fg }}>{source.name}</strong> ({source.duration}m) will be split into:</div>
+          <div style={{ fontSize: 11, color: t.mu, marginBottom: 4 }}>Task <strong style={{ color: t.fg }}>{source.name}</strong> {source.duration ? `(${source.duration}m) ` : ""}will be split into:</div>
           {err && <div style={{ fontSize: 12, color: "#c00", padding: "4px 8px", background: "rgba(204,0,0,0.1)", borderRadius: 4 }}>{err}</div>}
           {parts.map((p, i) => (
             <div key={i} style={{ display: "flex", gap: 8 }}>
